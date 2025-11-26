@@ -11,4 +11,5 @@ redis==5.0.1
 python-dotenv==1.0.1
 psycopg[binary]==3.2.3
 email-validator==2.2.0
+# QStash is used via HTTP, no additional package needed (httpx already included)
 

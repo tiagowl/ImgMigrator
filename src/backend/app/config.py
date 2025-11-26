@@ -34,10 +34,16 @@ class Settings(BaseSettings):
     GOOGLE_CLIENT_SECRET: Optional[str] = None
     GOOGLE_REDIRECT_URI: str = "http://localhost:8000/api/v1/auth/oauth/google/callback"
     
-    # Redis/Celery
+    # Redis/Celery (legacy - mantido para compatibilidade)
     REDIS_URL: str = "redis://localhost:6379/0"
     CELERY_BROKER_URL: str = "redis://localhost:6379/0"
     CELERY_RESULT_BACKEND: str = "redis://localhost:6379/0"
+    
+    # QStash
+    QSTASH_TOKEN: Optional[str] = None
+    QSTASH_CURRENT_SIGNING_KEY: Optional[str] = None
+    QSTASH_NEXT_SIGNING_KEY: Optional[str] = None
+    QSTASH_URL: str = "https://qstash.upstash.io/v2/publish"
     
     # CORS - aceita string separada por vírgulas ou lista
     ALLOWED_ORIGINS: Union[str, list[str]] = "http://localhost:3000,http://localhost:3001"

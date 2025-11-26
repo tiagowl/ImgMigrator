@@ -5,7 +5,10 @@ from sqlalchemy.orm import Session
 from app.models.migration import Migration
 from app.schemas.migration import MigrationCreate
 from app.repositories.migration_repository import MigrationRepository
-from app.workers.tasks import process_migration_task
+from app.config import settings
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class MigrationService:
@@ -54,8 +57,44 @@ class MigrationService:
         
         migration = self.repository.create(migration)
         
-        # Queue background job
-        process_migration_task.delay(migration.id, user_id)
+        # Queue background job using QStash or Celery
+        if settings.QSTASH_TOKEN:
+            # Use QStash
+            try:
+                from app.services.qstash_service import get_qstash_service
+                import asyncio
+                
+                qstash_service = get_qstash_service()
+                # QStash service needs to be async, but we're in sync context
+                # We'll use asyncio to run it
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                try:
+                    loop.run_until_complete(
+                        qstash_service.publish_migration_task(migration.id, user_id)
+                    )
+                    logger.info(f"Migration {migration.id} queued via QStash")
+                finally:
+                    loop.close()
+            except Exception as e:
+                logger.error(f"Failed to queue migration via QStash: {str(e)}")
+                # Fallback to Celery if available
+                try:
+                    from app.workers.tasks import process_migration_task
+                    process_migration_task.delay(migration.id, user_id)
+                    logger.info(f"Migration {migration.id} queued via Celery (fallback)")
+                except Exception as celery_error:
+                    logger.error(f"Failed to queue migration via Celery: {str(celery_error)}")
+                    raise ValueError("Failed to queue migration task")
+        else:
+            # Use Celery (legacy)
+            try:
+                from app.workers.tasks import process_migration_task
+                process_migration_task.delay(migration.id, user_id)
+                logger.info(f"Migration {migration.id} queued via Celery")
+            except Exception as e:
+                logger.error(f"Failed to queue migration via Celery: {str(e)}")
+                raise ValueError("Failed to queue migration task. Configure QSTASH_TOKEN or Celery.")
         
         return migration
     
@@ -123,8 +162,38 @@ class MigrationService:
         migration.status = "pending"
         self.db.commit()
         
-        # Queue background job
-        process_migration_task.delay(migration.id, user_id)
+        # Queue background job using QStash or Celery
+        if settings.QSTASH_TOKEN:
+            # Use QStash
+            try:
+                from app.services.qstash_service import get_qstash_service
+                import asyncio
+                
+                qstash_service = get_qstash_service()
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                try:
+                    loop.run_until_complete(
+                        qstash_service.publish_migration_task(migration.id, user_id)
+                    )
+                    logger.info(f"Migration {migration.id} resumed via QStash")
+                finally:
+                    loop.close()
+            except Exception as e:
+                logger.error(f"Failed to resume migration via QStash: {str(e)}")
+                # Fallback to Celery
+                try:
+                    from app.workers.tasks import process_migration_task
+                    process_migration_task.delay(migration.id, user_id)
+                except Exception:
+                    pass
+        else:
+            # Use Celery (legacy)
+            try:
+                from app.workers.tasks import process_migration_task
+                process_migration_task.delay(migration.id, user_id)
+            except Exception:
+                pass
         
         return True
     
