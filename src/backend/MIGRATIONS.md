@@ -97,3 +97,6 @@ python -c "from app.database import init_db; init_db()"
 Isso recriará todas as tabelas com a estrutura atual dos modelos.
 
 
+
+
+

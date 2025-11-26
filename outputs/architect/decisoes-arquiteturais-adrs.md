@@ -486,3 +486,6 @@ Implementar **checkpointing**: salvar progresso a cada 10 fotos processadas, per
 
 
 
+
+
+

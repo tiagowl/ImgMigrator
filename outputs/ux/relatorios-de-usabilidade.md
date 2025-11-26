@@ -584,3 +584,6 @@ Taxa de Conclusão = (Tarefas Completadas / Total de Tarefas) × 100
 
 
 
+
+
+

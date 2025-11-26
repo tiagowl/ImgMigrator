@@ -150,3 +150,6 @@ Se ainda houver problemas, verifique os logs do backend. Agora há logging detal
 4. **Verifique os logs** se ainda houver problemas
 
 
+
+
+
