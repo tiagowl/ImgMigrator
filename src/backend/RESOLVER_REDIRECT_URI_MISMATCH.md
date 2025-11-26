@@ -55,8 +55,8 @@ http://localhost:8000/api/v1/auth/oauth/google/callback
 Certifique-se de que o arquivo `.env` (não apenas `env.example`) está configurado:
 
 ```env
-GOOGLE_CLIENT_ID=336894349454-eiuinuh8f8oblo6e55kceg5v5e8lanhk.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=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
+GOOGLE_CLIENT_ID=seu-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=seu-client-secret
 GOOGLE_REDIRECT_URI=http://localhost:8000/api/v1/auth/oauth/google/callback
 ```
 

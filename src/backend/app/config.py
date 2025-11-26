@@ -67,7 +67,10 @@ class Settings(BaseSettings):
     class Config:
         """Pydantic config."""
         env_file = ".env"
+        env_file_encoding = "utf-8"
         case_sensitive = True
+        # Garantir que o arquivo .env seja lido
+        extra = "ignore"  # Ignorar variáveis extras no .env
 
 
 settings = Settings()
