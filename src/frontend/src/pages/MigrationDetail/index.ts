@@ -1,0 +1,4 @@
+export { MigrationDetail } from './MigrationDetail';
+
+
+

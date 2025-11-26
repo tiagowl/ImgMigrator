@@ -1,0 +1,21 @@
+﻿# Configuracao do Molde de Agentes
+
+## Agentes Disponiveis
+- Product Owner: Define requisitos e prioridades
+- Arquiteto: Projeta arquitetura do sistema  
+- Frontend Dev: Implementa interface do usuario
+- Backend Dev: Desenvolve APIs e logica de negocio
+- DevOps: Gerencia infraestrutura e deploy
+- Tester: Executa testes e garante qualidade
+- UX: Foca na experiencia do usuario
+
+## Como Usar
+1. Use o comando: ./scripts/activate-agent.ps1 [agent-name]
+2. Siga os templates em templates/
+3. Use os workflows em workflows/
+
+## Comandos Disponiveis
+- setup.ps1: Configuracao inicial
+- activate-agent.ps1: Ativar um agente especifico
+- start-workflow.ps1: Iniciar um workflow
+- list-agents.ps1: Listar agentes disponiveis

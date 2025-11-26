@@ -45,7 +45,13 @@ Como Product Owner, preciso que você:
 ### Para Análise de Requisitos
 ```
 Analise os seguintes requisitos e crie user stories detalhadas:
-[Inserir requisitos aqui]
+- Sistema para migrar fotos armazenados no icloud para o google drive;
+- O usuario coloca suas credenciais dos dois serviços, e o sistema aciona um script de automação que move as fotos do icloud para o google drive;
+- O sistema deve ter uma interface web;
+- O sistema deve ser uma aplicação fullstack em python;
+- As credenciais do icloud não serão pegas através de oauth;
+- As credenciais do google drive serão pegas atraves de oauth;
+- O banco de dados sera sqlite;
 
 Foque em:
 - Identificar personas

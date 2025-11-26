@@ -1,0 +1,7 @@
+﻿{
+    "template_path":  "D:\\Tiago\\Área de Trabalho\\Projetos\\agent-team-template\\scripts\\..\\templates\\frontend-dev-prompt.md",
+    "agent":  "frontend-dev",
+    "config_path":  "D:\\Tiago\\Área de Trabalho\\Projetos\\agent-team-template\\scripts\\..\\agents\\frontend-dev\\config.json",
+    "name":  "Desenvolvedor Frontend",
+    "activated_at":  "2025-11-24 11:13:02"
+}

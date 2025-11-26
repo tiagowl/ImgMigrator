@@ -1,0 +1,21 @@
+﻿{
+    "project":  {
+                    "created":  "2025-11-24 10:13:29",
+                    "agents":  [
+                                   "product-owner",
+                                   "architect",
+                                   "frontend-dev",
+                                   "backend-dev",
+                                   "devops",
+                                   "tester",
+                                   "ux"
+                               ],
+                    "name":  "ImgMigrator",
+                    "workflows":  [
+                                      "complete-development",
+                                      "feature-development",
+                                      "bug-fixing",
+                                      "code-review"
+                                  ]
+                }
+}

@@ -1,0 +1,16 @@
+# Versão simplificada - Use Python 3.11 ou 3.12 para ter wheels disponíveis
+# Para Python 3.13, você precisa instalar Rust primeiro (https://rustup.rs/)
+# OU use este arquivo com versões mais recentes que podem ter wheels
+
+fastapi==0.115.0
+uvicorn[standard]==0.34.0
+sqlalchemy==2.0.36
+pydantic==2.10.3
+pydantic-settings==2.7.0
+cryptography==46.0.2
+authlib==1.6.5
+httpx==0.28.1
+celery==5.3.4
+redis==5.0.1
+python-dotenv==1.0.1
+

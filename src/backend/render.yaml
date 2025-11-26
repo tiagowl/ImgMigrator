@@ -1,0 +1,110 @@
+services:
+  - type: web
+    name: cloud-migrate-api
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: MASTER_ENCRYPTION_KEY
+        generateValue: true
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: GOOGLE_REDIRECT_URI
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: CELERY_BROKER_URL
+        sync: false
+      - key: CELERY_RESULT_BACKEND
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: DEBUG
+        value: "False"
+      - key: ENVIRONMENT
+        value: "production"
+      - key: PORT
+        value: "10000"
+
+  - type: worker
+    name: cloud-migrate-worker
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: celery -A app.workers.celery_app worker --loglevel=info
+    envVars:
+      - key: DATABASE_URL
+        fromService:
+          type: postgresql
+          name: cloud-migrate-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: cloud-migrate-redis
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: cloud-migrate-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: cloud-migrate-redis
+          property: connectionString
+      - key: SECRET_KEY
+        fromService:
+          type: web
+          name: cloud-migrate-api
+          property: envVar
+          value: SECRET_KEY
+      - key: MASTER_ENCRYPTION_KEY
+        fromService:
+          type: web
+          name: cloud-migrate-api
+          property: envVar
+          value: MASTER_ENCRYPTION_KEY
+      - key: GOOGLE_CLIENT_ID
+        fromService:
+          type: web
+          name: cloud-migrate-api
+          property: envVar
+          value: GOOGLE_CLIENT_ID
+      - key: GOOGLE_CLIENT_SECRET
+        fromService:
+          type: web
+          name: cloud-migrate-api
+          property: envVar
+          value: GOOGLE_CLIENT_SECRET
+      - key: GOOGLE_REDIRECT_URI
+        fromService:
+          type: web
+          name: cloud-migrate-api
+          property: envVar
+          value: GOOGLE_REDIRECT_URI
+      - key: ALLOWED_ORIGINS
+        fromService:
+          type: web
+          name: cloud-migrate-api
+          property: envVar
+          value: ALLOWED_ORIGINS
+      - key: DEBUG
+        value: "False"
+      - key: ENVIRONMENT
+        value: "production"
+
+databases:
+  - name: cloud-migrate-db
+    databaseName: cloud_migrate
+    user: cloud_migrate_user
+
+redis:
+  - name: cloud-migrate-redis
+

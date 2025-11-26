@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-neutral-border;
+  }
+
+  body {
+    @apply bg-neutral-background text-neutral-primary font-sans;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  h1 {
+    @apply text-h1 font-bold;
+  }
+
+  h2 {
+    @apply text-h2 font-bold;
+  }
+
+  h3 {
+    @apply text-h3 font-semibold;
+  }
+
+  h4 {
+    @apply text-h4 font-semibold;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-lg py-md rounded text-button transition-all duration-fast;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+    min-height: 44px;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white;
+    @apply hover:bg-primary-hover active:bg-primary-active;
+    @apply disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply btn bg-transparent text-primary border border-primary;
+    @apply hover:bg-primary-light;
+    @apply disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-danger {
+    @apply btn bg-error text-white;
+    @apply hover:bg-error-hover;
+    @apply disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .input {
+    @apply w-full px-md py-md rounded border border-neutral-border;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary;
+    @apply disabled:opacity-60 disabled:cursor-not-allowed;
+    min-height: 44px;
+  }
+
+  .input-error {
+    @apply border-error focus:ring-error focus:border-error;
+  }
+
+  .card {
+    @apply bg-white rounded-lg border border-neutral-border p-lg shadow-sm;
+    @apply hover:shadow-md transition-shadow duration-base;
+  }
+
+  .label {
+    @apply block text-body font-semibold mb-sm text-neutral-primary;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
