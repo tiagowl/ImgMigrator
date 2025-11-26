@@ -32,7 +32,14 @@ env/
 
 # Environment
 .env
+.env.*
+*.env
 .env.local
+.env.production
+.env.development
+.env.test
+.env.example
+.env.render.example
 
 # IDE
 .vscode/
