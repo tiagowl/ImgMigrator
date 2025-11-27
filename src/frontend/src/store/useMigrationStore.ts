@@ -29,7 +29,7 @@ export const useMigrationStore = create<MigrationState>((set: (partial: Partial<
     try {
       const data = await migrationService.list(params);
       set({ migrations: data.migrations, isLoading: false });
-    } catch (error) {
+    } catch (_error) {
       set({ error: 'Erro ao carregar migrações', isLoading: false });
     }
   },
@@ -39,7 +39,7 @@ export const useMigrationStore = create<MigrationState>((set: (partial: Partial<
     try {
       const migration = await migrationService.get(id);
       set({ currentMigration: migration, isLoading: false });
-    } catch (error) {
+    } catch (_error) {
       set({ error: 'Erro ao carregar migração', isLoading: false });
     }
   },
@@ -48,7 +48,7 @@ export const useMigrationStore = create<MigrationState>((set: (partial: Partial<
     try {
       const progress = await migrationService.getProgress(id);
       set({ progress });
-    } catch (error) {
+    } catch (_error) {
       // Silenciar erro de progresso para não poluir a UI
     }
   },

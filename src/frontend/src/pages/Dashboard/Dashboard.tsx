@@ -52,7 +52,7 @@ export const Dashboard: React.FC = () => {
       const { auth_url } = await authService.initGoogleOAuth();
       // Redirect directly to Google OAuth
       window.location.href = auth_url;
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao iniciar autenticação do Google');
     }
   };
@@ -72,7 +72,7 @@ export const Dashboard: React.FC = () => {
       const migration = await migrationService.create(options);
       addMigration(migration);
       toast.success('Migração iniciada com sucesso!');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao iniciar migração');
     } finally {
       setIsStartingMigration(false);

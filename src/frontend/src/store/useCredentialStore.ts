@@ -22,7 +22,7 @@ export const useCredentialStore = create<CredentialState>((set: (partial: Partia
     try {
       const { credentials } = await credentialService.list();
       set({ credentials, isLoading: false });
-    } catch (error) {
+    } catch (_error) {
       set({ error: 'Erro ao carregar credenciais', isLoading: false });
     }
   },

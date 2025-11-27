@@ -42,7 +42,7 @@ export const MigrationDetail: React.FC = () => {
       const result = await migrationService.pause(migrationId);
       updateMigration(migrationId, { status: result.status as any });
       toast.success('Migração pausada');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao pausar migração');
     }
   };
@@ -53,7 +53,7 @@ export const MigrationDetail: React.FC = () => {
       const result = await migrationService.resume(migrationId);
       updateMigration(migrationId, { status: result.status as any });
       toast.success('Migração retomada');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao retomar migração');
     }
   };
@@ -67,7 +67,7 @@ export const MigrationDetail: React.FC = () => {
       await migrationService.delete(migrationId);
       toast.success('Migração cancelada');
       navigate('/history');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao cancelar migração');
     }
   };

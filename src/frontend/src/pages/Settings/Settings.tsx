@@ -62,7 +62,7 @@ export const Settings: React.FC = () => {
       const { auth_url } = await authService.initGoogleOAuth();
       // Redirect directly to Google OAuth
       window.location.href = auth_url;
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao iniciar autenticação do Google');
     }
   };
@@ -78,7 +78,7 @@ export const Settings: React.FC = () => {
       await credentialService.delete(googleCredential.id);
       removeCredential(googleCredential.id);
       toast.success('Google Drive desconectado com sucesso');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao desconectar Google Drive');
     }
   };
@@ -95,7 +95,7 @@ export const Settings: React.FC = () => {
       removeCredential(icloudCredential.id);
       reset();
       toast.success('Credenciais do iCloud removidas com sucesso');
-    } catch (error) {
+    } catch (_error) {
       toast.error('Erro ao remover credenciais');
     }
   };
