@@ -8,7 +8,7 @@ export interface Credential {
   id: number;
   user_id: number;
   service_type: 'icloud' | 'google_drive';
-  status: 'configured' | 'connected' | 'not_configured';
+  status: 'configured' | 'connected' | 'not_configured' | 'expired' | 'error';
   created_at: string;
   updated_at?: string;
 }

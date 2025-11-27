@@ -148,3 +148,7 @@ Se você já está usando Celery:
 - [Dashboard do Upstash](https://console.upstash.com/)
 - [Exemplos de uso](https://github.com/upstash/qstash-examples)
 
+
+
+
+
