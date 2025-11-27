@@ -9,9 +9,9 @@ import { useCredentialStore } from '@/store/useCredentialStore';
 import { useMigrationStore } from '@/store/useMigrationStore';
 import { migrationService } from '@/services/migrationService';
 import { authService } from '@/services/authService';
-import { formatProgress, formatFileSize, formatDuration } from '@/utils/formatters';
+import { formatProgress } from '@/utils/formatters';
 import toast from 'react-hot-toast';
-import type { MigrationOptions } from '@/types';
+import type { MigrationOptions, Credential } from '@/types';
 
 export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -19,8 +19,8 @@ export const Dashboard: React.FC = () => {
   const { migrations, fetchMigrations, addMigration, isLoading: migrationsLoading } = useMigrationStore();
   const [isStartingMigration, setIsStartingMigration] = useState(false);
 
-  const googleCredential = credentials.find((c) => c.service_type === 'google_drive');
-  const icloudCredential = credentials.find((c) => c.service_type === 'icloud');
+  const googleCredential = credentials.find((c) => c.service_type === 'google_drive') as Credential | undefined;
+  const icloudCredential = credentials.find((c) => c.service_type === 'icloud') as Credential | undefined;
   const activeMigration = migrations.find((m) => m.status === 'in_progress' || m.status === 'pending');
 
   useEffect(() => {

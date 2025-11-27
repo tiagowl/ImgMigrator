@@ -7,7 +7,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { LoadingSpinner } from '@/components/LoadingSpinner';
 import { useMigrationStore } from '@/store/useMigrationStore';
 import { usePolling } from '@/hooks/usePolling';
-import { formatDate, formatDuration, formatProgress, formatFileSize } from '@/utils/formatters';
+import { formatDate, formatDuration, formatProgress } from '@/utils/formatters';
 import { migrationService } from '@/services/migrationService';
 import toast from 'react-hot-toast';
 

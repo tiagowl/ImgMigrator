@@ -5,7 +5,7 @@ export const usePolling = <T>(
   interval: number = 2000,
   enabled: boolean = true
 ) => {
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   useEffect(() => {
     if (!enabled) return;
