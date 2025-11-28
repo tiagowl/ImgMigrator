@@ -91,7 +91,7 @@ class CredentialService:
         Returns:
             Created or updated credential
         """
-        from datetime import datetime, timedelta
+        from datetime import datetime, timedelta, timezone
         
         # Encrypt OAuth tokens
         encrypted_data, salt, nonce = EncryptionService.encrypt_oauth_tokens(
@@ -102,7 +102,7 @@ class CredentialService:
         # Calculate expiration time
         expires_at = None
         if expires_in:
-            expires_at = datetime.utcnow() + timedelta(seconds=expires_in)
+            expires_at = datetime.now(timezone.utc) + timedelta(seconds=expires_in)
         
         # Check if credential already exists
         existing = self.repository.find_by_user_and_service(user_id, "google_drive")
@@ -170,8 +170,8 @@ class CredentialService:
         if not credential or not credential.expires_at:
             return True
         
-        from datetime import datetime
-        return datetime.utcnow() >= credential.expires_at
+        from datetime import datetime, timezone
+        return datetime.now(timezone.utc) >= credential.expires_at
     
     def get_user_credentials(self, user_id: int) -> list[Credential]:
         """Get all credentials for a user."""
